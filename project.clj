@@ -2,7 +2,7 @@
 
   :description "demo project for react-data-grid"
   :url "http://github.com/kimim/cljs-react-data-grid"
-
+  :min-lein-version "2.0.0"
   :dependencies [[buddy/buddy-auth "2.2.0"]
                  [buddy/buddy-core "1.6.0"]
                  [buddy/buddy-hashers "1.4.0"]
@@ -46,7 +46,18 @@
                  [selmer "1.12.28"]
                  [thheller/shadow-cljs "2.10.17" :scope "provided"]]
 
-  :min-lein-version "2.0.0"
+  :npm-deps [["faker" "5.1.0"]
+             ["@material-ui/core" "4.11.0"]
+             ["@material-ui/icons" "4.9.1"]
+             [react-data-grid "7.0.0-canary.22"]
+             [lodash "4.17.20"]
+             [react-select "3.1.0"]
+             [react-sortable-hoc "1.11.0"]]
+
+  :npm-dev-deps [[xmlhttprequest "1.8.0"]
+                 ["@babel/core" "7.11.6"]
+                 ["@babel/preset-env" "7.11.5"]
+                 ["core-js" "3.6.5"]]
 
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
   :test-paths ["test/clj"]
@@ -72,15 +83,6 @@
     {:target :node-test
      :output-to "target/test/test.js"
      :autorun true}}}
-
-  :npm-deps [["faker" "5.1.0"]
-             ["@material-ui/core" "4.11.0"]
-             ["@material-ui/icons" "4.9.1"]
-             [react-data-grid "7.0.0-canary.22"]
-             [lodash "4.17.20"]
-             [react-select "3.1.0"]
-             [react-sortable-hoc "1.11.0"]]
-  :npm-dev-deps [[xmlhttprequest "1.8.0"]]
 
   :profiles
   {:uberjar {:omit-source true
@@ -113,9 +115,6 @@
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]}
    :project/test {:jvm-opts ["-Dconf=test-config.edn" ]
-                  :resource-paths ["env/test/resources"]
-
-
-                  }
+                  :resource-paths ["env/test/resources"]}
    :profiles/dev {}
    :profiles/test {}})

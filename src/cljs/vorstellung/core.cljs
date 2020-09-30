@@ -11,7 +11,8 @@
     [vorstellung.events]
     [reitit.core :as reitit]
     [reitit.frontend.easy :as rfe]
-    [clojure.string :as string])
+    [clojure.string :as string]
+    [vorstellung.data-grid :as data-grid])
   (:import goog.History))
 
 (defn nav-link [uri title page]
@@ -20,7 +21,7 @@
     :class (when (= page @(rf/subscribe [:common/page])) :is-active)}
    title])
 
-(defn navbar [] 
+(defn navbar []
   (r/with-let [expanded? (r/atom false)]
               [:nav.navbar.is-info>div.container
                [:div.navbar-brand
@@ -57,7 +58,7 @@
 (def router
   (reitit/router
     [["/" {:name        :home
-           :view        #'home-page
+           :view        #'data-grid/employees
            :controllers [{:start (fn [_] (rf/dispatch [:page/init-home]))}]}]
      ["/about" {:name :about
                 :view #'about-page}]]))
