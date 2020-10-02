@@ -65,10 +65,10 @@
   :target-path "target/%s/"
   :main ^:skip-aot vorstellung.core
 
-  :plugins [[lein-shadow "0.2.0"]]
+  :plugins [[lein-shadow "0.3.1"]]
   :clean-targets ^{:protect false} [:target-path "target/cljsbuild"]
   :shadow-cljs
-  {:nrepl {:port 7002}
+  {:nrepl {:port 7071}
    :builds
    {:app
     {:target :browser

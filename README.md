@@ -1,8 +1,6 @@
-# vorstellung
+# cljs-react-data-grid
 
-generated using Luminus version "3.85"
-
-FIXME
+demo of react-data-grid in clojurescript.
 
 ## Prerequisites
 
@@ -12,10 +10,16 @@ You will need [Leiningen][1] 2.0 or above installed.
 
 ## Running
 
-To start a web server for the application, run:
+To compile cljs:
 
-    lein run 
+    lein shadow compile :app
+
+To start the server:
+
+    lein run
+
+Visit: http://localhost:3030
 
 ## License
 
-Copyright © 2020 FIXME
+Copyright © 2020 kimim

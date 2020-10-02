@@ -73,6 +73,7 @@
 {
     border-color:#62b8ff
 }
+
 .rdg
 {
     position:relative;
@@ -87,6 +88,7 @@
     background-color:#fff;
     font-size:14px
 }
+
 .rdg *,.rdg ::after,.rdg
                     ::before
 {
@@ -291,4 +293,8 @@
   width: 100%;
   padding: 4px;
   font-size: 14px;
+}
+
+.fill-grid {
+    height: 100%;
 }

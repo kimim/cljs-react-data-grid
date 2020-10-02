@@ -81,7 +81,7 @@
        [:> DataGrid {:columns cols
                      :rows filtered-rows
                      :rowsCount 50
-                     :height "100vh" #_(- (.-innerHeight js/window) 54)
+                     :height (- (.-innerHeight js/window) 54)
                      :rowKey :id
                      :summaryRows [{:id "total_0" :totalCount (count filtered-rows) :salaryCount 200}]
                      :className "fill-grid"
