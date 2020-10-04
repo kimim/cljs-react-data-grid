@@ -1,6 +1,7 @@
 html,
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-y: auto;
 }
 @font-face {
   font-family: 'Material Icons';
@@ -32,4 +33,3 @@ body {
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
 }
-

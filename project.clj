@@ -49,7 +49,7 @@
   :npm-deps [["faker" "5.1.0"]
              ["@material-ui/core" "4.11.0"]
              ["@material-ui/icons" "4.9.1"]
-             [react-data-grid "7.0.0-canary.22"]
+             [react-data-grid "7.0.0-canary.24"]
              [lodash "4.17.20"]
              [react-select "3.1.0"]
              [react-sortable-hoc "1.11.0"]]

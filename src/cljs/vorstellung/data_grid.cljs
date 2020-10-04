@@ -78,12 +78,12 @@
                 {:key :salary :name "薪酬" :sortable true
                  :summaryFormatter #(r/as-element [:strong (reduce + (map :salary filtered-rows)) " 元"])}]]
       [:div
-       [:> DataGrid {:columns cols
+       [:> DataGrid {:style {:height (- (.-innerHeight js/window) 54)
+                             :overflow-y "auto"}
+                     :columns cols
                      :rows filtered-rows
                      :rowsCount 50
-                     :height (- (.-innerHeight js/window) 54)
                      :rowKey :id
                      :summaryRows [{:id "total_0" :totalCount (count filtered-rows) :salaryCount 200}]
-                     :className "fill-grid"
                      :enableFilters true
                      }]])))
