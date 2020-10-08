@@ -28,15 +28,23 @@
           #(= value (% key)))
     :contains #(s/includes? (% key) value)))
 
+(def SortableSelect (sortable/SortableContainer Select))
+(def sort-options [{:value :job-grade :label "职级"}
+                   {:value :job-type :label "职位"}])
+
+
 (defn employees []
   (r/with-let [filter-map
                (r/atom {:filter {:job-grade {:key :job-grade :value "All" :filter-type :eq}
                                  :gender {:key :gender :value "All" :filter-type :eq}
-                                 :name {:key :name :value "" :filter-type :contains}}})]
+                                 :name {:key :name :value "" :filter-type :contains}}})
+               selected (r/atom [])
+               expanded (r/atom nil)]
     (let [filtered-rows
           (filter (apply every-pred (map create-filter (vals (@filter-map :filter)))) rows)
           cols [{:key :id :name "工号" :summaryFormatter #(r/as-element [:strong "合计："])}
                 {:key :name :name "姓名"
+                 :groupFormatter #(count ((js->clj %) "childRows"))
                  :summaryFormatter #(r/as-element [:strong (count filtered-rows)])
                  :filterRenderer #(r/as-element [:div.rdg-filter-container
                                                  [:input.rdg-filter
@@ -76,9 +84,16 @@
                 {:key :job-type :name "岗位"}
                 {:key :company :name "公司"}
                 {:key :salary :name "薪酬" :sortable true
+                 :groupFormatter #(reduce + (map (fn [row] (get row "salary")) ((js->clj %) "childRows")))
                  :summaryFormatter #(r/as-element [:strong (reduce + (map :salary filtered-rows)) " 元"])}]]
       [:div
-       [:> DataGrid {:style {:height (- (.-innerHeight js/window) 54)
+       [:> SortableSelect
+        {:axis "xy"
+         :options sort-options
+         :isMulti true
+         :onChange #(reset! selected (map (fn [row] (keyword (get row "value"))) (js->clj %)))
+         :closeMenuOnSelect false}]
+       [:> DataGrid {:style {:height (- (.-innerHeight js/window) 90) ;;54
                              :overflow-y "auto"}
                      :columns cols
                      :rows filtered-rows
@@ -86,4 +101,9 @@
                      :rowKey :id
                      :summaryRows [{:id "total_0" :totalCount (count filtered-rows) :salaryCount 200}]
                      :enableFilters true
+                     :groupBy @selected
+                     :rowGrouper lodash/groupBy
+                     :expandedGroupIds @expanded
+                     :onExpandedGroupIdsChange #(reset! expanded %)
+                     :defaultColumnOptions true
                      }]])))
